@@ -5,24 +5,13 @@ import os
 from flask import Flask, jsonify, request, Response
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
-from flask_swagger_ui import get_swaggerui_blueprint
 from flask_cors import CORS  # Import CORS
 from bson import ObjectId  # Import ObjectId for MongoDB
 
 
 # Init flask app
 app = Flask(__name__)
-# Init swagger
-SWAGGER_URL = "/swagger"
-API_URL = "/static/swagger.json"
-swagger_ui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={
-        'app_name': 'Eshop API'
-    }
-)
-app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
+
 CORS(app)
 app.config["MONGO_URI"] = "mongodb+srv://poirotyourdad:6KuWTADXrqLHwoEg@cluster0.tjww1fn.mongodb.net/eshop?retryWrites=true&w=majority"
 client = MongoClient(app.config["MONGO_URI"])
